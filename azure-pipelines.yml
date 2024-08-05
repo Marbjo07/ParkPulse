@@ -7,7 +7,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  azureSubscription: 'e59d8001-f9c3-4f24-9a45-48eb4c662a6c'
+  azureSubscription: 'parkpulse-azure-subscription'
   azureContainerRegistry: 'parkpulsedocker'
   dockerComposeFile: 'docker-compose.yml'
   imageTag: 'v1.0.0'
