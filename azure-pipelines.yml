@@ -11,19 +11,22 @@ variables:
   azureContainerRegistry: 'parkpulsedocker'
   dockerComposeFile: 'docker-compose.yml'
   imageTag: 'v1.0.0'
+  DOCKER_USERNAME: $(DOCKER_USERNAME)  # Ensure these variables are defined in pipeline settings or variable groups
+  DOCKER_PASSWORD: $(DOCKER_PASSWORD)
 
 stages:
   - stage: Build
     jobs:
       - job: Build
         steps:
-          - task: Checkout@1
+          - task: Checkout@2
           
           - script: |
               printenv  # For Unix-based systems (Linux/macOS)
             displayName: 'Print Environment Variables'
 
           - script: |
+              set -x 
               docker-compose -f $(dockerComposeFile) build
             displayName: 'Build Docker Images'
 
