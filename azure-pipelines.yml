@@ -19,7 +19,7 @@ stages:
     jobs:
       - job: Build
         steps:
-          - task: Checkout@2
+          - checkout: self
           
           - script: |
               printenv  # For Unix-based systems (Linux/macOS)
