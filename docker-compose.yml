@@ -1,0 +1,63 @@
+networks:
+  internal_net:
+  frontend_net:
+
+services:
+  web:
+    build:
+      context: ./parkpulse-web
+      dockerfile: Dockerfile
+    volumes:
+      - ./parkpulse-web:/usr/src/app
+    environment:
+      - FLASK_ENV=production
+    depends_on:
+      - api
+      - accessmanager
+    networks:
+      - internal_net
+
+  api:
+    build:
+      context: ./parkpulse-api
+      dockerfile: Dockerfile
+    volumes:
+      - ./parkpulse-api:/usr/src/app
+      - downloads:/usr/src/app/downloads
+    env_file:
+      - .api.env
+    environment:
+      - FLASK_ENV=production
+    depends_on:
+      - accessmanager
+    networks:
+      - internal_net
+
+  accessmanager:
+    build:
+      context: ./parkpulse-accessmanager
+      dockerfile: Dockerfile
+    volumes:
+      - ./parkpulse-accessmanager:/usr/src/app
+    env_file:
+      - .accessmanager.prod.env
+    environment:
+      - FLASK_ENV=production
+    networks:
+      - internal_net
+
+
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "443:443" # HTTPS
+      - "80:80"   # HTTP
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - frontend_net
+      - internal_net
+
+volumes:
+  downloads:
