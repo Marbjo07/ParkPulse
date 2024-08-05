@@ -1,0 +1,46 @@
+trigger:
+  branches:
+    include:
+      - master  
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  azureSubscription: '<your-azure-subscription>'
+  azureContainerRegistry: 'parkpulsedocker'
+  dockerComposeFile: 'docker-compose.yml'
+  imageTag: 'v1.0.0'
+
+stages:
+  - stage: Build
+    jobs:
+      - job: Build
+        steps:
+          - task: Checkout@2
+          
+          - script: |
+              docker-compose -f $(dockerComposeFile) build
+            displayName: 'Build Docker Images'
+
+          - script: |
+              echo $(DOCKER_PASSWORD) | docker login $(azureContainerRegistry).azurecr.io -u $(DOCKER_USERNAME) --password-stdin
+            displayName: 'Login to Azure Container Registry'
+
+          - script: |
+              docker-compose -f $(dockerComposeFile) push
+            displayName: 'Push Docker Images'
+
+  - stage: Deploy
+    jobs:
+      - job: Deploy
+        steps:
+          - task: AzureWebApp@1
+            inputs:
+              azureSubscription: $(azureSubscription)
+              appName: '<your-web-app-name>'
+              images: |
+                $(azureContainerRegistry).azurecr.io/parkpulse-accessmanager:$(imageTag)
+                $(azureContainerRegistry).azurecr.io/parkpulse-api:$(imageTag)
+                $(azureContainerRegistry).azurecr.io/parkpulse-web:$(imageTag)
+                $(azureContainerRegistry).azurecr.io/nginx:$(imageTag)
