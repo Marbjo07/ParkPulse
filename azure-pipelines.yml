@@ -17,7 +17,7 @@ stages:
     jobs:
       - job: Build
         steps:
-          - task: Checkout@2
+          - task: Checkout@1
           
           - script: |
               docker-compose -f $(dockerComposeFile) build
