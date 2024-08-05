@@ -20,6 +20,10 @@ stages:
           - task: Checkout@1
           
           - script: |
+              printenv  # For Unix-based systems (Linux/macOS)
+            displayName: 'Print Environment Variables'
+
+          - script: |
               docker-compose -f $(dockerComposeFile) build
             displayName: 'Build Docker Images'
 
