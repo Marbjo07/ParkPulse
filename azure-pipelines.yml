@@ -7,7 +7,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  azureSubscription: '<your-azure-subscription>'
+  azureSubscription: 'e59d8001-f9c3-4f24-9a45-48eb4c662a6c'
   azureContainerRegistry: 'parkpulsedocker'
   dockerComposeFile: 'docker-compose.yml'
   imageTag: 'v1.0.0'
@@ -38,7 +38,7 @@ stages:
           - task: AzureWebApp@1
             inputs:
               azureSubscription: $(azureSubscription)
-              appName: '<your-web-app-name>'
+              appName: 'server-container'
               images: |
                 $(azureContainerRegistry).azurecr.io/parkpulse-accessmanager:$(imageTag)
                 $(azureContainerRegistry).azurecr.io/parkpulse-api:$(imageTag)
