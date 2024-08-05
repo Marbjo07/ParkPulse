@@ -39,6 +39,7 @@ stages:
             displayName: 'Push Docker Images'
 
   - stage: Deploy
+    dependsOn: Build
     jobs:
       - job: Deploy
         steps:
