@@ -11,7 +11,7 @@ variables:
   azureContainerRegistry: 'parkpulsedocker'
   dockerComposeFile: 'docker-compose.yml'
   imageTag: 'v1.0.0'
-  DOCKER_USERNAME: $(DOCKER_USERNAME)  # Ensure these variables are defined in pipeline settings or variable groups
+  DOCKER_USERNAME: $(DOCKER_USERNAME)
   DOCKER_PASSWORD: $(DOCKER_PASSWORD)
 
 stages:
@@ -22,26 +22,27 @@ stages:
           - checkout: self
 
           - task: DownloadSecureFile@1
-            name: caCertificate
-            displayName: 'Download CA certificate'
+            name: sshPrivateKey
+            displayName: 'Download SSH private key'
             inputs:
               secureFile: 'id_rsa'
 
           - script: |
-              echo Installing $(caCertificate.secureFilePath) to the trusted CA directory...
-              sudo chown root:root $(caCertificate.secureFilePath)
-              sudo chmod a+r $(caCertificate.secureFilePath)
-              sudo ln -s -t /etc/ssl/certs/ $(caCertificate.secureFilePath)
+              echo Installing SSH key $(sshPrivateKey.secureFilePath)...
+              sudo chown root:root $(sshPrivateKey.secureFilePath)
+              sudo chmod 600 $(sshPrivateKey.secureFilePath)
+            displayName: 'Install SSH private key'
+
+          - script: |
+              eval "$(ssh-agent -s)"
+              ssh-add ~/.ssh/id_rsa
+              git config --global core.sshCommand "ssh -i ~/.ssh/id_rsa -F /dev/null"
+            displayName: 'Setting Github SSH Key'
 
           - script: |
               chmod +x ./init_project.sh  # Ensure the script is executable
               ./init_project.sh  # Execute the script
             displayName: 'Initialize Project'
-
-
-          - script: |
-              printenv  # For Unix-based systems (Linux/macOS)
-            displayName: 'Print Environment Variables'
 
           - script: |
               set -x 
