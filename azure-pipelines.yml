@@ -20,44 +20,11 @@ stages:
       - job: Build
         steps:
           - checkout: self
-
-          - task: DownloadSecureFile@1
-            name: sshPrivateKey
-            displayName: 'Download SSH private key'
-            inputs:
-              secureFile: 'id_rsa'
+            submodules: true
 
           - script: |
-              set -x  # Print commands as they are executed
-              set -e  # Exit on error
-
-              echo Installing SSH key $(sshPrivateKey.secureFilePath)...
-              
-              # Create .ssh directory
-              mkdir -p ~/.ssh
-              
-              # Move the SSH key to the .ssh directory
-              mv $(sshPrivateKey.secureFilePath) ~/.ssh/id_rsa
-              
-              # Set the appropriate permissions
-              chmod 600 ~/.ssh/id_rsa
-              
-              # Start the SSH agent and add the key
-              eval "$(ssh-agent -s)"
-              ssh-add ~/.ssh/id_rsa
-              
-              # Configure Git to use the SSH key
-              git config --global core.sshCommand "ssh -i ~/.ssh/id_rsa -F /dev/null"
-
-              ssh -T git@github.com || true
-            displayName: 'Setting Github SSH Key'
-
-          - script: |
-              head -n 3 ~/.ssh/id_rsa
-              trail -n 3 ~/.ssh/id_rsa
-              chmod +x ./init_project.sh 
-              ./init_project.sh
-            displayName: 'Initialize Project'
+              git submodule update --init --recursive
+            displayName: 'Initialize Submodules'
 
           - script: |
               set -x 

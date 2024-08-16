@@ -1,0 +1,9 @@
+[submodule "parkpulse-web"]
+	path = parkpulse-web
+	url = https://github.com/Marbjo07/ParkPulse-website.git
+[submodule "parkpulse-api"]
+	path = parkpulse-api
+	url = https://github.com/Marbjo07/ParkPulse-API.git
+[submodule "parkpulse-accessmanager"]
+	path = parkpulse-accessmanager
+	url = https://github.com/Marbjo07/ParkPulse-accessmanager.git
