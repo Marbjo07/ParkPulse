@@ -13,6 +13,7 @@ variables:
   imageTag: 'v1.0.0'
   DOCKER_USERNAME: $(DOCKER_USERNAME)
   DOCKER_PASSWORD: $(DOCKER_PASSWORD)
+  GITHUB_PAT: $(GITHUB_PAT)
 
 stages:
   - stage: Build
@@ -20,19 +21,14 @@ stages:
       - job: Build
         steps:
           - checkout: self
-            submodules: true
+            submodules: false
             persistCredentials: false
 
           - script: |
               git config --global url."https://$(GITHUB_PAT)@github.com/".insteadOf "https://github.com/"
               git submodule update --init --recursive
             displayName: 'Initialize submodules'
-            env:
-              GITHUB_PAT: $(GITHUB_PAT)
-
-          - script: |
-              git submodule update --init --recursive
-            displayName: 'Initialize Submodules'
+              
 
           - script: |
               set -x 
