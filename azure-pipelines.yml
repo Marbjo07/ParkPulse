@@ -20,7 +20,11 @@ stages:
       - job: Build
         steps:
           - checkout: self
-          
+
+          - task: BatchScript@1
+          inputs:
+            filename: init_project.bat
+
           - script: |
               printenv  # For Unix-based systems (Linux/macOS)
             displayName: 'Print Environment Variables'
