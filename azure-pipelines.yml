@@ -9,7 +9,7 @@ pool:
 variables:
   azureSubscription: 'parkpulse-azure-subscription'
   azureContainerRegistry: 'parkpulsedocker'
-  dockerComposeFile: 'docker-compose.yml'
+  dockerComposeFile: 'docker-compose.prod.yml'
   imageTag: 'v1.0.0'
   appName: 'ParkPulse-Web'
 
