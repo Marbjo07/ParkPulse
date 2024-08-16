@@ -27,7 +27,7 @@ stages:
 
           - script: |
               set -x 
-              docker-compose -f $(dockerComposeFile) build
+              docker compose -f $(dockerComposeFile) build
             displayName: 'Build Docker Images'
 
           - script: |
@@ -35,7 +35,7 @@ stages:
             displayName: 'Login to Azure Container Registry'
 
           - script: |
-              docker-compose -f $(dockerComposeFile) push
+              docker compose -f $(dockerComposeFile) push
             displayName: 'Push Docker Images'
 
   - stage: Deploy
