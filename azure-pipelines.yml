@@ -29,13 +29,25 @@ stages:
 
           - script: |
               echo Installing SSH key $(sshPrivateKey.secureFilePath)...
-              sudo chown root:root $(sshPrivateKey.secureFilePath)
+              
+              # Create .ssh directory
               mkdir -p ~/.ssh
+              
+              # Move the SSH key to the .ssh directory
               mv $(sshPrivateKey.secureFilePath) ~/.ssh/id_rsa
-              sudo chmod 600 ~/.ssh/id_rsa
+              
+              # Set the appropriate permissions
+              chmod 600 ~/.ssh/id_rsa
+              
+              # Start the SSH agent and add the key
               eval "$(ssh-agent -s)"
               ssh-add ~/.ssh/id_rsa
+              
+              # Configure Git to use the SSH key
               git config --global core.sshCommand "ssh -i ~/.ssh/id_rsa -F /dev/null"
+              
+              # Optionally test the SSH connection
+              ssh -T git@github.com
             displayName: 'Setting Github SSH Key'
 
           - script: |
