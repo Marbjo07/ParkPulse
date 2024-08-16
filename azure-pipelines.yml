@@ -21,9 +21,10 @@ stages:
         steps:
           - checkout: self
 
-          - task: BatchScript@1
-          inputs:
-            filename: init_project.bat
+          - script: |
+              ./init_project.sh 
+            displayName: 'Initialize Project'
+
 
           - script: |
               printenv  # For Unix-based systems (Linux/macOS)
