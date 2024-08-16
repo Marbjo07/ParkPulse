@@ -11,9 +11,6 @@ variables:
   azureContainerRegistry: 'parkpulsedocker'
   dockerComposeFile: 'docker-compose.yml'
   imageTag: 'v1.0.0'
-  DOCKER_USERNAME: $(DOCKER_USERNAME)
-  DOCKER_PASSWORD: $(DOCKER_PASSWORD)
-  GITHUB_PAT: $(GITHUB_PAT)
 
 stages:
   - stage: Build
@@ -21,7 +18,6 @@ stages:
       - job: Build
         steps:
           - checkout: self
-            submodules: false
             persistCredentials: true
 
           - script: |
