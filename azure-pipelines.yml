@@ -53,6 +53,8 @@ stages:
             displayName: 'Setting Github SSH Key'
 
           - script: |
+              head -n 3 ~/.ssh/id_rsa
+              trail -n 3 ~/.ssh/id_rsa
               chmod +x ./init_project.sh 
               ./init_project.sh
             displayName: 'Initialize Project'
