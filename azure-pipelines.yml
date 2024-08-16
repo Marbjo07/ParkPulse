@@ -32,7 +32,7 @@ stages:
               sudo chown root:root $(sshPrivateKey.secureFilePath)
               mkdir -p ~/.ssh
               mv $(sshPrivateKey.secureFilePath) ~/.ssh/id_rsa
-              sudo chmod 600 $(sshPrivateKey.secureFilePath)
+              sudo chmod 600 ~/.ssh/id_rsa
             displayName: 'Install SSH private key'
 
           - script: |
