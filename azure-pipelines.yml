@@ -30,6 +30,8 @@ stages:
           - script: |
               echo Installing SSH key $(sshPrivateKey.secureFilePath)...
               sudo chown root:root $(sshPrivateKey.secureFilePath)
+              mkdir -p ~/.ssh
+              mv $(sshPrivateKey.secureFilePath) ~/.ssh/id_rsa
               sudo chmod 600 $(sshPrivateKey.secureFilePath)
             displayName: 'Install SSH private key'
 
