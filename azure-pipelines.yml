@@ -28,7 +28,7 @@ stages:
           - script: |
               set -x 
               ls -R
-              mkdir downloads
+              mkdir parkpulse-api/downloads
               ls -R
               docker compose -f $(dockerComposeFile) build
             displayName: 'Build Docker Images'
