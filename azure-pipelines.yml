@@ -22,7 +22,8 @@ stages:
           - checkout: self
 
           - script: |
-              ./init_project.sh 
+              chmod +x ./init_project.sh  # Ensure the script is executable
+              ./init_project.sh  # Execute the script
             displayName: 'Initialize Project'
 
 
