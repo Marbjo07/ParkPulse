@@ -74,6 +74,7 @@ stages:
             inputs:
               azureSubscription: $(azureSubscription)
               appName: $(appName)
+              multicontainerConfigFile: $(dockerComposeFile)
               images: |
                 $(azureContainerRegistry).azurecr.io/parkpulse-accessmanager:$(imageTag)
                 $(azureContainerRegistry).azurecr.io/parkpulse-api:$(imageTag)
