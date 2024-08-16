@@ -24,10 +24,12 @@ stages:
               git config --global url."https://$(GITHUB_PAT)@github.com/".insteadOf "https://github.com/"
               git submodule update --init --recursive
             displayName: 'Initialize submodules'
-              
 
           - script: |
               set -x 
+              ls -R
+              mkdir downloads
+              ls -R
               docker compose -f $(dockerComposeFile) build
             displayName: 'Build Docker Images'
 
