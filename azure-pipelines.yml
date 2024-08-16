@@ -11,6 +11,7 @@ variables:
   azureContainerRegistry: 'parkpulsedocker'
   dockerComposeFile: 'docker-compose.yml'
   imageTag: 'v1.0.0'
+  appName: 'ParkPulse-Web'
 
 stages:
   - stage: Build
@@ -72,7 +73,7 @@ stages:
           - task: AzureWebApp@1
             inputs:
               azureSubscription: $(azureSubscription)
-              appName: 'server-container'
+              appName: $(appName)
               images: |
                 $(azureContainerRegistry).azurecr.io/parkpulse-accessmanager:$(imageTag)
                 $(azureContainerRegistry).azurecr.io/parkpulse-api:$(imageTag)
