@@ -65,11 +65,22 @@ stages:
               docker compose -f $(dockerComposeFile) push
             displayName: 'Push Docker Images'
 
+          - task: PublishBuildArtifacts@1
+            inputs:
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+              ArtifactName: 'drop'
+              publishLocation: 'Container'
+
   - stage: Deploy
     dependsOn: Build
     jobs:
       - job: Deploy
         steps:
+        - task: DownloadBuildArtifacts@0
+          inputs:
+            artifactName: 'drop'
+            downloadPath: '$(System.ArtifactsDirectory)'
+
           - task: AzureWebApp@1
             inputs:
               azureSubscription: $(azureSubscription)
