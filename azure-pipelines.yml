@@ -33,17 +33,14 @@ stages:
               mkdir -p ~/.ssh
               mv $(sshPrivateKey.secureFilePath) ~/.ssh/id_rsa
               sudo chmod 600 ~/.ssh/id_rsa
-            displayName: 'Install SSH private key'
-
-          - script: |
               eval "$(ssh-agent -s)"
               ssh-add ~/.ssh/id_rsa
               git config --global core.sshCommand "ssh -i ~/.ssh/id_rsa -F /dev/null"
             displayName: 'Setting Github SSH Key'
 
           - script: |
-              chmod +x ./init_project.sh  # Ensure the script is executable
-              ./init_project.sh  # Execute the script
+              chmod +x ./init_project.sh 
+              ./init_project.sh
             displayName: 'Initialize Project'
 
           - script: |
