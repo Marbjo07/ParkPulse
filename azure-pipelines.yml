@@ -21,6 +21,18 @@ stages:
         steps:
           - checkout: self
 
+          - task: DownloadSecureFile@1
+            name: caCertificate
+            displayName: 'Download CA certificate'
+            inputs:
+              secureFile: 'id_rsa'
+
+          - script: |
+              echo Installing $(caCertificate.secureFilePath) to the trusted CA directory...
+              sudo chown root:root $(caCertificate.secureFilePath)
+              sudo chmod a+r $(caCertificate.secureFilePath)
+              sudo ln -s -t /etc/ssl/certs/ $(caCertificate.secureFilePath)
+
           - script: |
               chmod +x ./init_project.sh  # Ensure the script is executable
               ./init_project.sh  # Execute the script
