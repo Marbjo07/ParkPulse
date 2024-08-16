@@ -22,13 +22,7 @@ stages:
         steps:
           - checkout: self
             submodules: false
-            persistCredentials: false
-
-          - script: |
-              git config --global url."https://$(GITHUB_PAT)@github.com/".insteadOf "https://github.com/"
-              git submodule update --init --recursive
-            displayName: 'Initialize submodules'
-              
+            persistCredentials: true
 
           - script: |
               set -x 
