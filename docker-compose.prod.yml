@@ -5,7 +5,7 @@ networks:
 services:
   web:
     build:
-      context: ${WEBAPP_STORAGE_HOME}/parkpulse-web
+      context: ./parkpulse-web
       dockerfile: Dockerfile
     volumes:
       - ${WEBAPP_STORAGE_HOME}/parkpulse-web:/usr/src/app
@@ -19,7 +19,7 @@ services:
 
   api:
     build:
-      context: ${WEBAPP_STORAGE_HOME}/parkpulse-api
+      context: ./parkpulse-api
       dockerfile: Dockerfile
     volumes:
       - ${WEBAPP_STORAGE_HOME}/parkpulse-api:/usr/src/app
@@ -35,7 +35,7 @@ services:
 
   accessmanager:
     build:
-      context: ${WEBAPP_STORAGE_HOME}/parkpulse-accessmanager
+      context: ./parkpulse-accessmanager
       dockerfile: Dockerfile
     volumes:
       - ${WEBAPP_STORAGE_HOME}/parkpulse-accessmanager:/usr/src/app
