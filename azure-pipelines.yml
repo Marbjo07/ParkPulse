@@ -30,7 +30,7 @@ stages:
           - script: |
               set -x  # Print commands as they are executed
               set -e  # Exit on error
-              
+
               echo Installing SSH key $(sshPrivateKey.secureFilePath)...
               
               # Create .ssh directory
@@ -48,6 +48,8 @@ stages:
               
               # Configure Git to use the SSH key
               git config --global core.sshCommand "ssh -i ~/.ssh/id_rsa -F /dev/null"
+
+              ssh -T git@github.com || true
             displayName: 'Setting Github SSH Key'
 
           - script: |
