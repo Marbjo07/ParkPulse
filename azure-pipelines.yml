@@ -11,6 +11,7 @@ variables:
   azureContainerRegistry: 'parkpulsedocker'
   dockerComposeFile: 'docker-compose.prod.yml'
   dockerComposeFileDeploy: 'docker-compose.deploy.yml'
+  kubernetesServiceConnection: 'aks-dev-cluster-connection'
   imageTag: 'v1.0.0'
   appName: 'ParkPulse-Web'
 
@@ -66,18 +67,37 @@ stages:
               docker compose -f $(dockerComposeFile) push
             displayName: 'Push Docker Images'
 
-  - stage: Deploy
-    dependsOn: Build
-    jobs:
-      - job: Deploy
-        steps:
-          - task: AzureWebAppContainer@1
-            inputs:
-              azureSubscription: $(azureSubscription)
-              appName: $(appName)
-              multicontainerConfigFile: $(dockerComposeFileDeploy)
-              images: |
-                $(azureContainerRegistry).azurecr.io/parkpulse-accessmanager:$(imageTag)
-                $(azureContainerRegistry).azurecr.io/parkpulse-api:$(imageTag)
-                $(azureContainerRegistry).azurecr.io/parkpulse-web:$(imageTag)
-                $(azureContainerRegistry).azurecr.io/nginx:$(imageTag)
+    - stage: Deploy
+      dependsOn: Build
+      jobs:
+        - deployment: DeployToAKS
+          pool:
+            vmImage: 'ubuntu-latest'
+          environment: 'aks-dev'
+
+          strategy:
+            runOnce:
+              deploy:
+                steps:
+                  - task: Kubernetes@1
+                    inputs:
+                      kubernetesServiceConnection: $(kubernetesServiceConnection)
+                      command: 'installKubectl'
+                      versionSpec: 'latest'
+
+                  - script: |
+                      curl -L https://github.com/kubernetes/kompose/releases/download/v1.28.0/kompose-linux-amd64 -o kompose
+                      chmod +x kompose
+                      sudo mv ./kompose /usr/local/bin/kompose
+                      kompose convert -f docker-compose.yml
+                    displayName: 'Convert Docker Compose to Kubernetes YAML'
+
+                  - task: Kubernetes@1
+                    inputs:
+                      kubernetesServiceConnection: $(kubernetesServiceConnection)
+                      command: 'apply'
+                      useConfigurationFile: true
+                      configuration: |
+                        deployment.yaml
+                        service.yaml
+                    displayName: 'Deploy to AKS'
