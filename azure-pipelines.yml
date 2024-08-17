@@ -12,6 +12,7 @@ variables:
   dockerComposeFile: 'docker-compose.prod.yml'
   dockerComposeFileDeploy: 'docker-compose.deploy.yml'
   kubernetesServiceConnection: 'aks-dev-cluster-connection'
+  kubernetesServiceEndpoint: 'parkpulse-aks-connection'
   imageTag: 'v1.0.0'
   appName: 'ParkPulse-Web'
 
@@ -81,6 +82,7 @@ stages:
                 - task: Kubernetes@1
                   inputs:
                     kubernetesServiceConnection: $(kubernetesServiceConnection)
+                    kubernetesServiceEndpoint: $(kubernetesServiceEndpoint)
                     command: 'installKubectl'
                     versionSpec: 'latest'
 
@@ -94,6 +96,7 @@ stages:
                 - task: Kubernetes@1
                   inputs:
                     kubernetesServiceConnection: $(kubernetesServiceConnection)
+                    kubernetesServiceEndpoint: $(kubernetesServiceEndpoint)
                     command: 'apply'
                     useConfigurationFile: true
                     configuration: |
