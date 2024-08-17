@@ -1,0 +1,41 @@
+services:
+  web:
+    build:
+      context: ./parkpulse-web
+      dockerfile: Dockerfile
+    volumes:
+      - ./parkpulse-web:/usr/src/app
+    environment:
+      - FLASK_ENV=production
+    ports:
+      - 5000:5000
+
+  api:
+    build:
+      context: ./parkpulse-api
+      dockerfile: Dockerfile
+    volumes:
+      - ./parkpulse-api:/usr/src/app
+      - downloads:/usr/src/app/downloads
+    env_file:
+      - .api.env
+    environment:
+      - FLASK_ENV=production
+    ports:
+      - 5001:5000
+
+  accessmanager:
+    build:
+      context: ./parkpulse-accessmanager
+      dockerfile: Dockerfile
+    volumes:
+      - ./parkpulse-accessmanager:/usr/src/app
+    env_file:
+      - .accessmanager.prod.env
+    environment:
+      - FLASK_ENV=production
+    ports:
+      - 5002:5000
+
+volumes:
+  downloads:
