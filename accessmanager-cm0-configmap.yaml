@@ -1,0 +1,135 @@
+apiVersion: v1
+binaryData:
+  access_manager.state: Z0FTVjRRRUFBQUFBQUFCOWxJd0VkR1Z6ZEpTTURtRmpZMlZ6YzE5dFlXNWhaMlZ5bEl3RVZYTmxjcFNUbENtQmxIMlVLSXdJZFhObGNtNWhiV1dVYUFHTURYQmhjM04zYjNKa1gyaGhjMmlVakVBeE1UTTBOVGxsWWpkaVlqTXhZbVJrWldVNE5XRmtaVFV5TXpCa05tRmtOV1E0WWpKbVlqVXlPRGM1WlRBd1lUZzBabVkyWVdVeE1EWTNZVEl4TUdRemxJd0daM0p2ZFhCemxGMlVqQWhUWlhKaGNHaHBiWlJoakE1elpYUjFjRjlqYjIxd2JHVjBaWlNJakFadmJteHBibVdVaUl3UGMyVjBkWEJmWVhWMGFGOW9ZWE5vbEU2TUZXbHpYM0psYzJWMGRHbHVaMTl3WVhOemQyOXlaSlNJakJCelpYTnphVzl1WDJGMWRHaGZjM1J5bEl4QU0yTTJabUk0TlRBMk9XTTJZalV5TXprd01UVmlPVEpsTlRSbE5XUTBNelU0WXpNM1lXTmxNRFkxT0RnM01tSTVOamhqWVRrNVpEUmhNVFJoWWpsaU1wUjFZbk45bENpTURXVnNZWGRoZVMxemQyVmtaVzZVYUFLTUJVZHliM1Z3bEpPVUtZR1VmWlFvakF0d1pYSnRhWE56YVc5dWM1UjlsSXdFWTJsMGVaUmRsQ2lNQm0xMWJtbGphSlNNQ1hOMGIyTnJhRzlzYlpSbGM0d0taM0p2ZFhCZmJtRnRaWlJvRkl3SGJXVnRZbVZ5YzVSZGxIVmlqQWhUWlhKaGNHaHBiWlJvRmltQmxIMlVLR2daZlpSb0gyZ2lhQ0JkbEl3RWRHVnpkSlJoZFdKMWhwUXU=
+  log.txt: V3pJd01qUXRNRGd0TVRjZ2ZDQXhNVG8xTmpveE15NDJPVE1nZkNBYld6QnRTVTVHVHh0Yk1HMWRPaUFiV3pCdFUzVmpZMlZ6YzJaMWJHeDVJR3h2WVdSbFpDQnpkR0YwWlNCaGJtUWdiRzluSUdaeWIyMGdZV05qWlhOelgyMWhibUZuWlhJdWMzUmhkR1ViV3pCdENsc3lNREkwTFRBNExURTNJSHdnTVRFNk5UWTZNVE11TmpreklId2dHMXN3YlVsT1JrOGJXekJ0WFRvZ0cxc3diVUZzYkNCMWMyVnljem9nV3lkMFpYTjBKMTBiV3pCdENsc3lNREkwTFRBNExURTNJSHdnTVRFNk5UWTZNVE11TmpreklId2dHMXN3YlVsT1JrOGJXekJ0WFRvZ0cxc3diVlJ2ZEdGc0lHNTFiV0psY2lCdlppQjFjMlZ5Y3pvZ01SdGJNRzBLV3pJd01qUXRNRGd0TVRjZ2ZDQXhNVG8xTmpveE15NDJPVFFnZkNBYld6QnRTVTVHVHh0Yk1HMWRPaUFiV3pCdFFXeHNJR2R5YjNWd2N6b2dXeWRsYkdGM1lYa3RjM2RsWkdWdUp5d2dKMU5sY21Gd2FHbHRKMTBiV3pCdENsc3lNREkwTFRBNExURTNJSHdnTVRFNk5UWTZNVE11TmprMElId2dHMXN3YlVsT1JrOGJXekJ0WFRvZ0cxc3diVlJ2ZEdGc0lHNTFiV0psY2lCdlppQm5jbTkxY0hNNklESWJXekJ0Q2c9PQ==
+data:
+  .gitignore: |-
+    access_manager.state
+    log.txt
+  Dockerfile: |-
+    # syntax=docker/dockerfile:1
+
+    ARG PYTHON_VERSION=3.12.2
+    FROM python:${PYTHON_VERSION}-slim as base
+
+    # Prevents Python from writing pyc files.
+    ENV PYTHONDONTWRITEBYTECODE=1
+    ENV PYTHONUNBUFFERED=1
+
+    WORKDIR /usr/src/app
+
+    ARG UID=10001
+    RUN adduser \
+        --disabled-password \
+        --gecos "" \
+        --home "/nonexistent" \
+        --shell "/sbin/nologin" \
+        --no-create-home \
+        --uid "${UID}" \
+        appuser
+
+    RUN --mount=type=cache,target=/root/.cache/pip \
+        --mount=type=bind,source=requirements.txt,target=requirements.txt \
+        python -m pip install -r requirements.txt
+
+    # Switch to the non-privileged user to run the application.
+    USER appuser
+
+    # Copy the source code into the container.
+    COPY . .
+    COPY ./gunicorn_config.py .
+
+    # Expose the port that the application listens on.
+    EXPOSE 5000
+    ENV PYTHONPATH=/usr/src/app/app
+    # Run the application.
+    CMD ["gunicorn", "-w", "1", "-c", "gunicorn_config.py", "app:app", "-b", ":5000"]
+  Dockerfile.dev: |-
+    # syntax=docker/dockerfile:1
+
+    ARG PYTHON_VERSION=3.12.2
+    FROM python:${PYTHON_VERSION}-slim as base
+
+    # Prevents Python from writing pyc files.
+    ENV PYTHONDONTWRITEBYTECODE=1
+    ENV PYTHONUNBUFFERED=1
+
+    WORKDIR /usr/src/app
+
+    ARG UID=10001
+    RUN adduser \
+        --disabled-password \
+        --gecos "" \
+        --home "/nonexistent" \
+        --shell "/sbin/nologin" \
+        --no-create-home \
+        --uid "${UID}" \
+        appuser
+
+    RUN --mount=type=cache,target=/root/.cache/pip \
+        --mount=type=bind,source=requirements.txt,target=requirements.txt \
+        python -m pip install -r requirements.txt
+
+    # Switch to the non-privileged user to run the application.
+    USER appuser
+
+    COPY . .
+
+    # Expose the port that the application listens on.
+    EXPOSE 5000
+
+    ENV PYTHONPATH=/usr/src/app/app
+
+    # Run the application.
+    CMD ["gunicorn", "-w", "1", "-c", "gunicorn_config.py", "app:app", "-b", ":5000"]
+  README.md: |
+    # Access Manager
+
+    This is a docker container that manages user authentication and authorization to various resources.</br>
+    When in production this container only exposes one endpoint, /refresh_state, which fetches the state from azure storage.</br>
+    So the only way of changing state is to:</br>
+
+    1. run this image locally
+    2. execute the changes
+    3. update the state stored in azure (currently done manually)
+    4. call /refresh_state
+
+    Its designed this way to prevent unauthorized remote control, as long as azure storage asremain safe/unknown.
+  gunicorn_config.py: |-
+    # gunicorn_config.py
+
+    import logging
+    import sys
+
+    # Server socket
+    bind = '0.0.0.0:5000'
+
+    # Workers
+    workers = 1
+
+    # Logging
+    accesslog = '-'  # Log to stdout
+    errorlog = '-'   # Log to stderr
+
+    # Log level
+    loglevel = 'info'
+
+    # Custom log format for access logs
+    access_log_format = '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"'
+
+    # Configure the logger
+    logger = logging.getLogger('gunicorn.error')
+    logger.handlers = [logging.StreamHandler(sys.stdout)]
+  requirements.txt: |-
+    Flask==3.0.3
+    Flask-Cors==4.0.1
+    requests==2.32.3
+    gunicorn==22.0.0
+    flask_login
+    azure-storage-blob
+    azure-identity
+kind: ConfigMap
+metadata:
+  labels:
+    io.kompose.service: accessmanager
+  name: accessmanager-cm0

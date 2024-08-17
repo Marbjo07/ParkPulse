@@ -59,5 +59,32 @@ services:
       - frontend_net
       - internal_net
 
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./prometheus:/etc/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - "9090:9090"
+    networks:
+      - internal_net
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=yourpassword
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    networks:
+      - frontend_net
+      - internal_net
+
+
 volumes:
   downloads:
+  grafana-storage:

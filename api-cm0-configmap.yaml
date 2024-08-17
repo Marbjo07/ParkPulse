@@ -1,0 +1,101 @@
+apiVersion: v1
+binaryData:
+  requirements.txt: Ly81aUFHa0FaQUJwQUdNQWRBQTlBRDBBTUFBdUFESUFNd0F1QURFQURRQUtBR0lBYkFCcEFHNEFhd0JsQUhJQVBRQTlBREVBTGdBNEFDNEFNZ0FOQUFvQVl3QmxBSElBZEFCcEFHWUFhUUE5QUQwQU1nQXdBRElBTkFBdUFEY0FMZ0EwQUEwQUNnQmpBR1lBWmdCcEFEMEFQUUF4QUM0QU1RQTJBQzRBTUFBTkFBb0FZd0JvQUdFQWNnQnpBR1VBZEFBdEFHNEFid0J5QUcwQVlRQnNBR2tBZWdCbEFISUFQUUE5QURNQUxnQXpBQzRBTWdBTkFBb0FZd0JzQUdrQVl3QnJBRDBBUFFBNEFDNEFNUUF1QURjQURRQUtBR01BY2dCNUFIQUFkQUJ2QUdjQWNnQmhBSEFBYUFCNUFEMEFQUUEwQURNQUxnQXdBQzRBTUFBTkFBb0FaQUJ1QUhNQWNBQjVBSFFBYUFCdkFHNEFQUUE5QURJQUxnQTJBQzRBTVFBTkFBb0FaUUIyQUdVQWJnQjBBR3dBWlFCMEFEMEFQUUF3QUM0QU13QTJBQzRBTVFBTkFBb0FSZ0JzQUdFQWN3QnJBRDBBUFFBekFDNEFNQUF1QURNQURRQUtBRVlBYkFCaEFITUFhd0F0QUVNQWJ3QnlBSE1BUFFBOUFEUUFMZ0F3QUM0QU1RQU5BQW9BUmdCc0FHRUFjd0JyQUMwQVV3QnZBR01BYXdCbEFIUUFTUUJQQUQwQVBRQTFBQzRBTXdBdUFEWUFEUUFLQUdjQVpRQjJBR1VBYmdCMEFEMEFQUUF5QURRQUxnQXlBQzRBTVFBTkFBb0Fad0J5QUdVQVpRQnVBR3dBWlFCMEFEMEFQUUF6QUM0QU1BQXVBRE1BRFFBS0FHY0FkUUJ1QUdrQVl3QnZBSElBYmdBOUFEMEFNZ0F5QUM0QU1BQXVBREFBRFFBS0FHZ0FNUUF4QUQwQVBRQXdBQzRBTVFBMEFDNEFNQUFOQUFvQWFRQmtBRzRBWVFBOUFEMEFNd0F1QURjQURRQUtBR2tBZEFCekFHUUFZUUJ1QUdjQVpRQnlBRzhBZFFCekFEMEFQUUF5QUM0QU1nQXVBREFBRFFBS0FFb0FhUUJ1QUdvQVlRQXlBRDBBUFFBekFDNEFNUUF1QURRQURRQUtBRTBBWVFCeUFHc0FkUUJ3QUZNQVlRQm1BR1VBUFFBOUFESUFMZ0F4QUM0QU5RQU5BQW9BYmdCMUFHMEFjQUI1QUQwQVBRQXlBQzRBTUFBdUFERUFEUUFLQUhBQVlRQmpBR3NBWVFCbkFHa0FiZ0JuQUQwQVBRQXlBRFFBTGdBeEFBMEFDZ0J3QUdrQWJBQnNBRzhBZHdBOUFEMEFNUUF3QUM0QU5BQXVBREFBRFFBS0FIQUFlUUJqQUhBQVlRQnlBSE1BWlFCeUFEMEFQUUF5QUM0QU1nQXlBQTBBQ2dCd0FIa0FkQUJvQUc4QWJnQXRBR1VBYmdCbkFHa0FiZ0JsQUdrQWJ3QTlBRDBBTkFBdUFEa0FMZ0F4QUEwQUNnQndBSGtBZEFCb0FHOEFiZ0F0QUhNQWJ3QmpBR3NBWlFCMEFHa0Fid0E5QUQwQU5RQXVBREVBTVFBdUFETUFEUUFLQUhJQVpRQnhBSFVBWlFCekFIUUFjd0E5QUQwQU1nQXVBRE1BTWdBdUFETUFEUUFLQUhNQVpRQjBBSFVBY0FCMEFHOEFid0JzQUhNQVBRQTlBRFlBT1FBdUFERUFMZ0F4QUEwQUNnQnpBR2tBYlFCd0FHd0FaUUF0QUhjQVpRQmlBSE1BYndCakFHc0FaUUIwQUQwQVBRQXhBQzRBTUFBdUFEQUFEUUFLQUhRQWNRQmtBRzBBUFFBOUFEUUFMZ0EyQURZQUxnQTBBQTBBQ2dCMUFISUFiQUJzQUdrQVlnQXpBRDBBUFFBeUFDNEFNZ0F1QURJQURRQUtBRmNBWlFCeUFHc0FlZ0JsQUhVQVp3QTlBRDBBTXdBdUFEQUFMZ0F6QUEwQUNnQjNBR2dBWlFCbEFHd0FQUUE5QURBQUxnQTBBRE1BTGdBd0FBMEFDZ0IzQUhNQWNBQnlBRzhBZEFCdkFEMEFQUUF4QUM0QU1nQXVBREFBRFFBS0FIb0Fid0J3QUdVQUxnQmxBSFlBWlFCdUFIUUFQUUE5QURVQUxnQXdBQTBBQ2dCNkFHOEFjQUJsQUM0QWFRQnVBSFFBWlFCeUFHWUFZUUJqQUdVQVBRQTlBRFlBTGdBMEFDNEFjQUJ2QUhNQWRBQXlBQTBBQ2dCd0FISUFid0J0QUdVQWRBQm9BR1VBZFFCekFGOEFZd0JzQUdrQVpRQnVBSFFBRFFBS0FITUFaUUJzQUdVQWJnQnBBSFVBYlFBTkFBb0Fkd0JsQUdJQVpBQnlBR2tBZGdCbEFISUFYd0J0QUdFQWJnQmhBR2NBWlFCeUFBMEFDZ0JzQUhnQWJRQnNBQT09
+data:
+  Dockerfile: |-
+    # syntax=docker/dockerfile:1
+
+    ARG PYTHON_VERSION=3.12.2
+    FROM python:${PYTHON_VERSION}-slim as base
+
+    # Prevents Python from writing pyc files.
+    ENV PYTHONDONTWRITEBYTECODE=1
+    ENV PROPAGATE_EXCEPTIONS=True
+    ENV PYTHONUNBUFFERED=1
+
+    WORKDIR /usr/src/app
+
+    # Install unzip utility
+    RUN apt-get update && apt-get install -y unzip && rm -rf /var/lib/apt/lists/*
+
+    # Create a non-privileged user that the app will run under.
+    ARG UID=10001
+    RUN adduser \
+        --disabled-password \
+        --gecos "" \
+        --home "/nonexistent" \
+        --shell "/sbin/nologin" \
+        --no-create-home \
+        --uid "${UID}" \
+        appuser
+
+    # Download dependencies
+    COPY requirements.txt .
+    RUN --mount=type=cache,target=/root/.cache/pip \
+        python -m pip install -r requirements.txt
+
+    # Create a directory for the downloaded files
+    RUN mkdir -p /usr/src/app/downloads && chown -R appuser:appuser /usr/src/app/downloads
+
+    # Run the downloadTiles.py script to download the zip files into the downloads directory
+    COPY ./app/downloadTiles.py /usr/src/app/downloadTiles.py
+    RUN python downloadTiles.py --output-dir /usr/src/app/downloads
+
+    RUN chown -R appuser:appuser /usr/src/app/downloads
+
+    User appuser
+
+    # Unzip the downloaded files while preserving folder structure
+    RUN for dir in downloads/zips/*; do \
+            city=$(basename "$dir"); \
+            mkdir -p "downloads/pulse_tiles/$city"; \
+            echo "downloads/pulse_tiles/$city"; \
+            find "$dir" -name "*.zip" -exec unzip -d "downloads/pulse_tiles/$city" {} \;; \
+        done
+
+    # Copy the source code into the container.
+    COPY ./gunicorn_config.py .
+    COPY ./app /usr/src/app
+    COPY ./downloads downloads:
+
+    # Expose the port that the application listens on.
+    EXPOSE 5000
+
+    CMD ["gunicorn", "-c", "gunicorn_config.py", "run:app", "-b", ":5000"]
+  Dockerfile.dev: "# syntax=docker/dockerfile:1\n\nARG PYTHON_VERSION=3.12.2\nFROM python:${PYTHON_VERSION}-slim as base\n\n# Prevents Python from writing pyc files.\nENV PYTHONDONTWRITEBYTECODE=1\nENV PYTHONUNBUFFERED=1\nWORKDIR /usr/src/app\n\n# Chrome dependency Instalation\nRUN apt-get update && apt-get install -y \\\n    fonts-liberation \\\n    libasound2 \\\n    libatk-bridge2.0-0 \\\n    libatk1.0-0 \\\n    libatspi2.0-0 \\\n    libcups2 \\\n    libdbus-1-3 \\\n    libdrm2 \\\n    libgbm1 \\\n    libgtk-3-0 \\\n    libnspr4 \\\n    libnss3 \\\n    libwayland-client0 \\\n    libxcomposite1 \\\n    libxdamage1 \\\n    libxfixes3 \\\n    libxkbcommon0 \\\n    libxrandr2 \\\n    xdg-utils \\\n    libu2f-udev \\\n    libvulkan1\n\nRUN apt-get -y update; apt-get -y install curl\n\n # Chrome instalation \nRUN curl -LO  https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb\nRUN apt-get install -y ./google-chrome-stable_current_amd64.deb\nRUN rm google-chrome-stable_current_amd64.deb\n# Check chrome version\nRUN echo \"Chrome: \" && google-chrome --version\n\n# Install unzip utility\nRUN apt-get update && apt-get install -y unzip && rm -rf /var/lib/apt/lists/*\n\n# Create a non-privileged user that the app will run under.\nARG UID=10001\nRUN adduser \\\n    --disabled-password \\\n    --gecos \"\" \\\n    --home \"/usr/src/app/\" \\\n    --shell \"/sbin/nologin\" \\\n    --no-create-home \\\n    --uid \"${UID}\" \\\n    appuser\n\n# Download dependencies\nCOPY requirements.txt .\nRUN --mount=type=cache,target=/root/.cache/pip \\\n    python -m pip install -r requirements.txt\n\nCOPY ./init_selenium.py /usr/src/app/init_selenium.py\nRUN python init_selenium.py\n\n# Create a directory for the downloaded files\nRUN mkdir -p /usr/src/app/downloads && chown -R appuser:appuser /usr/src/app/downloads\n\n# Run the downloadTiles.py script to download the zip files into the downloads directory\nCOPY ./app/downloadTiles.py /usr/src/app/downloadTiles.py\nRUN python downloadTiles.py --output-dir /usr/src/app/downloads\n\nRUN chown -R appuser:appuser /usr/src/app/downloads\n\nUser appuser\n\n# Unzip the downloaded files while preserving folder structure\nRUN for dir in downloads/zips/*; do \\\n        city=$(basename \"$dir\"); \\\n        mkdir -p \"downloads/pulse_tiles/$city\"; \\\n        echo \"downloads/pulse_tiles/$city\"; \\\n        find \"$dir\" -name \"*.zip\" -exec unzip -d \"downloads/pulse_tiles/$city\" {} \\;; \\\n    done\n\n# Copy the source code into the container.\nCOPY ./app /usr/src/app\nCOPY ./downloads downloads:\n\n# Expose the port that the application listens on.\nEXPOSE 5000\n\nENV FLASK_APP=run:app\nCMD [\"flask\", \"run\", \"--host=0.0.0.0\", \"--debug\"]"
+  gunicorn_config.py: |-
+    # gunicorn_config.py
+
+    import logging
+    import sys
+
+    # Server socket
+    bind = '0.0.0.0:8080'
+
+    # Workers
+    workers = 1
+
+    # Logging
+    accesslog = '-'  # Log to stdout
+    errorlog = '-'   # Log to stderr
+
+    # Log level
+    loglevel = 'info'
+
+    # Custom log format for access logs
+    access_log_format = '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"'
+
+    # Configure the logger
+    logger = logging.getLogger('gunicorn.error')
+    logger.handlers = [logging.StreamHandler(sys.stdout)]
+  init_selenium.py: "from selenium import webdriver\nfrom selenium.webdriver.chrome.service import Service as ChromeService\nfrom selenium.webdriver.chrome.options import Options\nfrom webdriver_manager.chrome import ChromeDriverManager\n\ndef setup_selenium():\n    # Set up Chrome options\n    chrome_options = Options()\n    chrome_options.add_argument(\"--headless\")\n    chrome_options.add_argument(\"--no-sandbox\")\n    chrome_options.add_argument(\"--disable-dev-shm-usage\")\n\n    # Set up Chromedriver\n    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)\n    \n    # Perform a simple test to ensure it's working\n    driver.get(\"http://example.com\")\n    print(f\"Page title: {driver.title}\")\n    \n    # Clean up\n    driver.quit()\n\nif __name__ == \"__main__\":\n    setup_selenium()"
+  run.py: |-
+    from app.app import app
+
+    if __name__ == "__main__":
+        app.run()
+kind: ConfigMap
+metadata:
+  labels:
+    io.kompose.service: api
+  name: api-cm0

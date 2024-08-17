@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  AZURE_BLOB_SERVICE_URL: https://accessmanagerstorage.blob.core.windows.net/storage
+  AZURE_CONTAINER_NAME: storage
+  SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
+  USE_AZURE_STORAGE: "False"
+kind: ConfigMap
+metadata:
+  labels:
+    io.kompose.service: accessmanager-accessmanager-prod-env
+  name: accessmanager-prod-env

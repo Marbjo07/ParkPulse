@@ -1,0 +1,117 @@
+apiVersion: v1
+data:
+  Dockerfile: |
+    # syntax=docker/dockerfile:1
+
+    ARG PYTHON_VERSION=3.12.2
+    FROM python:${PYTHON_VERSION}-slim as base
+
+    # Prevents Python from writing pyc files.
+    ENV PYTHONDONTWRITEBYTECODE=1
+    ENV PYTHONUNBUFFERED=1
+
+    WORKDIR /usr/src/app
+
+    ARG UID=10001
+    RUN adduser \
+        --disabled-password \
+        --gecos "" \
+        --home "/nonexistent" \
+        --shell "/sbin/nologin" \
+        --no-create-home \
+        --uid "${UID}" \
+        appuser
+
+    RUN --mount=type=cache,target=/root/.cache/pip \
+        --mount=type=bind,source=requirements.txt,target=requirements.txt \
+        python -m pip install -r requirements.txt
+
+    # Switch to the non-privileged user to run the application.
+    USER appuser
+
+    # Copy the source code into the container.
+    COPY . .
+    COPY gunicorn_config.py .
+
+    # Expose the port that the application listens on.
+    EXPOSE 5000
+
+    # Run the application.
+    CMD ["gunicorn","-c", "gunicorn_config.py", "run:app"]
+  Dockerfile.dev: |-
+    # syntax=docker/dockerfile:1
+
+    ARG PYTHON_VERSION=3.12.2
+    FROM python:${PYTHON_VERSION}-slim as base
+
+    # Prevents Python from writing pyc files.
+    ENV PYTHONDONTWRITEBYTECODE=1
+    ENV PYTHONUNBUFFERED=1
+
+    WORKDIR /usr/src/app
+
+    ARG UID=10001
+    RUN adduser \
+        --disabled-password \
+        --gecos "" \
+        --home "/nonexistent" \
+        --shell "/sbin/nologin" \
+        --no-create-home \
+        --uid "${UID}" \
+        appuser
+
+    RUN --mount=type=cache,target=/root/.cache/pip \
+        --mount=type=bind,source=requirements.txt,target=requirements.txt \
+        python -m pip install -r requirements.txt
+
+    # Copy the source code into the container.
+    COPY . .
+
+    # Switch to the non-privileged user to run the application.
+    USER appuser
+
+    # Expose the port that the application listens on.
+    EXPOSE 5000
+
+    ENV FLASK_APP=app/app.py
+    CMD ["flask", "run", "--host=0.0.0.0", "--debug"]
+  gunicorn_config.py: |-
+    # gunicorn_config.py
+
+    import logging
+    import sys
+
+    # Server socket
+    bind = '0.0.0.0:5000'
+
+    # Workers
+    workers = 1
+
+    # Logging
+    accesslog = '-'  # Log to stdout
+    errorlog = '-'   # Log to stderr
+
+    # Log level
+    loglevel = 'info'
+
+    # Custom log format for access logs
+    access_log_format = '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"'
+
+    # Configure the logger
+    logger = logging.getLogger('gunicorn.error')
+    logger.handlers = [logging.StreamHandler(sys.stdout)]
+  requirements.txt: |-
+    Flask==3.0.3
+    Flask-Cors==4.0.1
+    requests==2.32.3
+    gunicorn==22.0.0
+  run.py: |-
+    from app.app import app
+
+    if __name__ == "__main__":
+        app.run()
+kind: ConfigMap
+metadata:
+  labels:
+    io.kompose.service: web
+  name: web-cm0
