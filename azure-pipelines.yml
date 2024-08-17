@@ -73,6 +73,7 @@ stages:
       - deployment: DeployToAKS
         pool:
           vmImage: 'ubuntu-latest'
+        environment: 'aks-dev'
         strategy:
           runOnce:
             deploy:
