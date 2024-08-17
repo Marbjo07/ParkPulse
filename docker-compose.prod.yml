@@ -21,6 +21,8 @@ services:
     ports:
       - 5000:5000
 
+
+
   accessmanager:
     build:
       context: ./parkpulse-accessmanager
