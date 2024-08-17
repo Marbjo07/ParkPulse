@@ -72,7 +72,7 @@ stages:
             inputs:
               azureSubscription: $(azureSubscription)
               appName: parkpulse-accessmanager
-              images: $(azureContainerRegistry).azurecr.io/parkpulse-accessmanager:$(imageTag)
+              imageName: $(azureContainerRegistry).azurecr.io/parkpulse-accessmanager:$(imageTag)
 
       - job: DeployAPI
         steps:
@@ -80,7 +80,7 @@ stages:
             inputs:
               azureSubscription: $(azureSubscription)
               appName: parkpulse-api
-              images: $(azureContainerRegistry).azurecr.io/parkpulse-api:$(imageTag)
+              imageName: $(azureContainerRegistry).azurecr.io/parkpulse-api:$(imageTag)
 
       - job: DeployWeb
         steps:
@@ -88,4 +88,4 @@ stages:
             inputs:
               azureSubscription: $(azureSubscription)
               appName: parkpulse-web
-              images: $(azureContainerRegistry).azurecr.io/parkpulse-web:$(imageTag)
+              imageName: $(azureContainerRegistry).azurecr.io/parkpulse-web:$(imageTag)
