@@ -3,25 +3,14 @@ services:
     build:
       context: ./parkpulse-web
       dockerfile: Dockerfile
+    volumes:
+      - downloads:/usr/src/app/downloads
+    env_file:
+      - .web.env
     environment:
       - FLASK_ENV=production
     ports:
       - 5000:5000
-
-  api:
-    build:
-      context: ./parkpulse-api
-      dockerfile: Dockerfile
-    volumes:
-      - downloads:/usr/src/app/downloads
-    env_file:
-      - .api.env
-    environment:
-      - FLASK_ENV=production
-    ports:
-      - 5001:5000
-    depends_on: # to seperate logs
-      - web
 
   accessmanager:
     build:
@@ -35,7 +24,6 @@ services:
       - 5002:5000
     depends_on: # to seperate logs
       - web
-      - api
 
 volumes:
   downloads:

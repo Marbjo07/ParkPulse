@@ -28,7 +28,7 @@ stages:
           - task: DownloadSecureFile@1
             displayName: 'Download secure files'
             inputs:
-              secureFile: .api.env
+              secureFile: .web.env
 
           - task: DownloadSecureFile@1
             displayName: 'Download secure files'
@@ -39,7 +39,7 @@ stages:
             displayName: 'Copy Files to: $(System.DefaultWorkingDirectory)'
             inputs:
               SourceFolder: '$(Agent.TempDirectory)'
-              Contents: .api.env
+              Contents: .web.env
               TargetFolder: '$(System.DefaultWorkingDirectory)'
 
           - task: CopyFiles@2
@@ -51,13 +51,12 @@ stages:
 
           - script: |
               set -x 
-              mkdir parkpulse-api/downloads
+              mkdir parkpulse-web/downloads
               docker compose -f $(dockerComposeFile) -p parkpulse build 
             displayName: 'Build Docker Images'
 
           - script: |
               docker tag parkpulse-accessmanager:latest $(azureContainerRegistry).azurecr.io/parkpulse-accessmanager:$(imageTag) 
-              docker tag parkpulse-api:latest $(azureContainerRegistry).azurecr.io/parkpulse-api:$(imageTag) 
               docker tag parkpulse-web:latest $(azureContainerRegistry).azurecr.io/parkpulse-web:$(imageTag) 
             displayName: 'Tag Docker Images'
 
@@ -71,7 +70,6 @@ stages:
 
           - script: |
               docker push $(azureContainerRegistry).azurecr.io/parkpulse-accessmanager:$(imageTag)
-              docker push $(azureContainerRegistry).azurecr.io/parkpulse-api:$(imageTag)
               docker push $(azureContainerRegistry).azurecr.io/parkpulse-web:$(imageTag)
             displayName: 'Push Docker Images to Azure Container Registry'
 
@@ -87,14 +85,6 @@ stages:
               azureSubscription: $(azureSubscription)
               appName: parkpulse-accessmanager
               imageName: $(azureContainerRegistry).azurecr.io/parkpulse-accessmanager:$(imageTag) 
-
-      - job: DeployAPI
-        steps:
-          - task: AzureWebAppContainer@1
-            inputs:
-              azureSubscription: $(azureSubscription)
-              appName: parkpulse-api
-              imageName: $(azureContainerRegistry).azurecr.io/parkpulse-api:$(imageTag) 
 
       - job: DeployWeb
         steps:
