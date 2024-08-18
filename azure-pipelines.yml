@@ -60,8 +60,9 @@ stages:
             displayName: 'Login to Azure Container Registry'
 
           - script: |
-              docker compose -f $(dockerComposeFile) push
-            displayName: 'Push Docker Images'
+              docker images
+            displayName: 'Listing images'
+
 
   - stage: Deploy
     dependsOn: Build
