@@ -56,9 +56,9 @@ stages:
             displayName: 'Build Docker Images'
 
           - script: |
-              docker tag parkpulse-accessmanager parkpulse-accessmanager:$(imageTag) 
-              docker tag parkpulse-api parkpulse-api:$(imageTag) 
-              docker tag parkpulse-web parkpulse-web:$(imageTag) 
+              docker tag parkpulse-accessmanager:latest $(azureContainerRegistry).azurecr.io/parkpulse-accessmanager:$(imageTag) 
+              docker tag parkpulse-api:latest $(azureContainerRegistry).azurecr.io/parkpulse-api:$(imageTag) 
+              docker tag parkpulse-web:latest $(azureContainerRegistry).azurecr.io/parkpulse-web:$(imageTag) 
             displayName: 'Tag Docker Images'
 
           - script: |
@@ -66,14 +66,15 @@ stages:
             displayName: 'Login to Azure Container Registry'
           
           - script: |
+              docker images
+            displayName: 'Listing images'
+
+          - script: |
               docker push $(azureContainerRegistry).azurecr.io/parkpulse-accessmanager:$(imageTag)
               docker push $(azureContainerRegistry).azurecr.io/parkpulse-api:$(imageTag)
               docker push $(azureContainerRegistry).azurecr.io/parkpulse-web:$(imageTag)
             displayName: 'Push Docker Images to Azure Container Registry'
 
-          - script: |
-              docker images
-            displayName: 'Listing images'
 
 
   - stage: Deploy
