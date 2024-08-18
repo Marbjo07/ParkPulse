@@ -1,3 +1,7 @@
+networks:
+  internal_net:
+  frontend_net:
+
 services:
   web:
     build:
@@ -7,6 +11,8 @@ services:
       - FLASK_ENV=development
     ports:
       - 5000:5000
+    networks:
+      - frontend_net
 
   api:
     build:
@@ -20,6 +26,11 @@ services:
       - FLASK_ENV=development
     ports:
       - 5001:5000
+    depends_on: # to seperate logs
+      - web
+    networks:
+      - internal_net
+      - frontend_net
 
   accessmanager:
     build:
@@ -31,6 +42,11 @@ services:
       - FLASK_ENV=development
     ports:
       - 5002:5000
-
+    depends_on: # to seperate logs
+      - web
+      - api
+    networks:
+      - internal_net
+      - frontend_net
 volumes:
   downloads:
