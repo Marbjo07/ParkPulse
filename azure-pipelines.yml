@@ -52,7 +52,7 @@ stages:
           - script: |
               set -x 
               mkdir parkpulse-api/downloads
-              docker compose -f $(dockerComposeFile) build --build-arg
+              docker compose -f $(dockerComposeFile) build 
             displayName: 'Build Docker Images'
 
           - script: |
