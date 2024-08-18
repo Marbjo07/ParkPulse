@@ -64,6 +64,12 @@ stages:
           - script: |
               echo $(DOCKER_PASSWORD) | docker login $(azureContainerRegistry).azurecr.io -u $(DOCKER_USERNAME) --password-stdin
             displayName: 'Login to Azure Container Registry'
+          
+          - script: |
+              docker push $(azureContainerRegistry).azurecr.io/parkpulse-accessmanager:$(imageTag)
+              docker push $(azureContainerRegistry).azurecr.io/parkpulse-api:$(imageTag)
+              docker push $(azureContainerRegistry).azurecr.io/parkpulse-web:$(imageTag)
+            displayName: 'Push Docker Images to Azure Container Registry'
 
           - script: |
               docker images
