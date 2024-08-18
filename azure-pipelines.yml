@@ -10,7 +10,7 @@ variables:
   azureSubscription: 'parkpulse-azure-subscription'
   azureContainerRegistry: 'parkpulsedocker'
   dockerComposeFile: 'docker-compose.prod.yml'
-  imageTag: 'v1.0.1'
+  imageTag: 'v1.0.0'
 
 stages:
   - stage: Build
@@ -52,7 +52,7 @@ stages:
           - script: |
               set -x 
               mkdir parkpulse-api/downloads
-              docker compose -f $(dockerComposeFile) build --build-arg VERSION_TAG=${imageTag}
+              docker compose -f $(dockerComposeFile) build --build-arg
             displayName: 'Build Docker Images'
 
           - script: |
