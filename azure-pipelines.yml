@@ -56,6 +56,12 @@ stages:
             displayName: 'Build Docker Images'
 
           - script: |
+              docker tag parkpulse-accessmanager parkpulse-accessmanager:$(imageTag) 
+              docker tag parkpulse-api parkpulse-api:$(imageTag) 
+              docker tag parkpulse-web parkpulse-web:$(imageTag) 
+            displayName: 'Tag Docker Images'
+
+          - script: |
               echo $(DOCKER_PASSWORD) | docker login $(azureContainerRegistry).azurecr.io -u $(DOCKER_USERNAME) --password-stdin
             displayName: 'Login to Azure Container Registry'
 
