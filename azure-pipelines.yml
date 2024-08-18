@@ -10,7 +10,7 @@ variables:
   azureSubscription: 'parkpulse-azure-subscription'
   azureContainerRegistry: 'parkpulsedocker'
   dockerComposeFile: 'docker-compose.prod.yml'
-  imageTag: 'latest'
+  imageTag: 'v1.0.1'
 
 stages:
   - stage: Build
