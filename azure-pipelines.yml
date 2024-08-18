@@ -10,7 +10,7 @@ variables:
   azureSubscription: 'parkpulse-azure-subscription'
   azureContainerRegistry: 'parkpulsedocker'
   dockerComposeFile: 'docker-compose.prod.yml'
-  imageTag: 'v1.0.0'
+  imageTag: 'v1.0.1'
 
 stages:
   - stage: Build
@@ -79,7 +79,7 @@ stages:
             inputs:
               azureSubscription: $(azureSubscription)
               appName: parkpulse-accessmanager
-              imageName: $(azureContainerRegistry).azurecr.io/parkpulse-accessmanager:$(imageTag)
+              imageName: $(azureContainerRegistry).azurecr.io/parkpulse-accessmanager:latest
 
       - job: DeployAPI
         steps:
@@ -87,7 +87,7 @@ stages:
             inputs:
               azureSubscription: $(azureSubscription)
               appName: parkpulse-api
-              imageName: $(azureContainerRegistry).azurecr.io/parkpulse-api:$(imageTag)
+              imageName: $(azureContainerRegistry).azurecr.io/parkpulse-api:latest
 
       - job: DeployWeb
         steps:
@@ -95,4 +95,4 @@ stages:
             inputs:
               azureSubscription: $(azureSubscription)
               appName: parkpulse-web
-              imageName: $(azureContainerRegistry).azurecr.io/parkpulse-web:$(imageTag)
+              imageName: $(azureContainerRegistry).azurecr.io/parkpulse-web:latest
