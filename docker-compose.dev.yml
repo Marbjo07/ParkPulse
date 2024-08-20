@@ -9,8 +9,9 @@ services:
       dockerfile: Dockerfile.dev
     volumes:
       - downloads:/usr/src/app/downloads
+      - ./parkpulse-web:/usr/src/app #can cause issues but enables live reload
     env_file:
-      - .web.env
+      - .web.dev.env
     environment:
       - FLASK_ENV=development
     ports:
@@ -23,6 +24,8 @@ services:
     build:
       context: ./parkpulse-accessmanager
       dockerfile: Dockerfile.dev
+    volumes:
+      - ./parkpulse-accessmanager:/usr/src/app #can cause issues but enables live reload
     env_file:
       - .accessmanager.dev.env
     environment:

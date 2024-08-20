@@ -6,7 +6,7 @@ services:
     volumes:
       - downloads:/usr/src/app/downloads
     env_file:
-      - .web.env
+      - .web.prod.env
     environment:
       - FLASK_ENV=production
     ports:
