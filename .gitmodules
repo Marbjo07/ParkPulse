@@ -4,3 +4,6 @@
 [submodule "parkpulse-accessmanager"]
 	path = parkpulse-accessmanager
 	url = https://github.com/Marbjo07/ParkPulse-accessmanager.git
+[submodule "brf-engine"]
+	path = brf-engine
+	url = https://github.com/Marbjo07/BRF-Engine

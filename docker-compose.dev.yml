@@ -5,20 +5,35 @@ networks:
 services:
   web:
     build:
-      context: ./parkpulse-web
-      dockerfile: Dockerfile.dev
+      context: ./parkpulse-web/
+      dockerfile: Dockerfile
     volumes:
-      - downloads:/usr/src/app/downloads
       - ./parkpulse-web:/usr/src/app #can cause issues but enables live reload
     env_file:
       - .web.dev.env
     environment:
       - FLASK_ENV=development
     ports:
-      - 5000:5000
+      - 8080:8080
+    networks: 
+      - internal_net
+      - frontend_net
+
+  brf:
+    build:
+      context: ./brf-engine
+      dockerfile: Dockerfile
+
+    env_file:
+      - .brf.env
+    environment:
+      - FLASK_ENV=development
+    ports:
+      - 5001:5000
     networks:
       - internal_net
       - frontend_net
+
 
   accessmanager:
     build:
@@ -31,7 +46,7 @@ services:
     environment:
       - FLASK_ENV=development
     ports:
-      - 5002:5000
+      - 5000:5000
     
     networks:
       - internal_net
