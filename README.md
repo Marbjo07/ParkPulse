@@ -55,6 +55,3 @@ ParkPulse-AI: repo coming soon
 - Microsoft Entra ID for authentication
 - Session-based User Management
 
-## Contact
-
-For questions or more details, feel free to contact me via email at [marius.bjorhei@gmail.com](marius.bjorhei@gmail.com).
